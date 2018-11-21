@@ -5,6 +5,28 @@
   src: url("assets/fonts/opensans/OpenSans-Light.ttf");
 }
 
+@font-face {
+  font-family: 'opensans-regular';
+  src: url("assets/fonts/opensans/OpenSans-Regular.ttf");
+}
+
+@font-face {
+  font-family: 'opensans-bold';
+  src: url("assets/fonts/opensans/OpenSans-Bold.ttf");
+}
+
+@font-face {
+  font-family: 'opensans-semibold';
+  src: url("assets/fonts/opensans/OpenSans-Semibold.ttf");
+}
+
 body {
-  font-family: 'opensans-light';
+  font-family: 'opensans-regular';
+  background: #0F2027;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fff;
 }
