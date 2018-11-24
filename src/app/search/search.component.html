@@ -5,7 +5,7 @@
       <div class="form-group">
         <!-- <label>Song, Artist name, Album name</label> -->
         <div class="position-relative searchmain">
-          <input type="text" name="search" id="searchInput" class="form-control" placeholder="Song, Artist name, Album name"
+          <input type="text" id="searchInput" name="search"  class="form-control" placeholder="Song, Artist name, Album name"
             (keyup)="searchFocus($event);" [formControl]="searchField" autocomplete="off">
           <div class="position-absolute">
             <i class="fas fa-music"></i>
@@ -15,21 +15,25 @@
           </div>
         </div>
         <div class="sResult position-relative" *ngIf="results">
-          <!-- <div class="sResult position-relative"> -->
-          <p class="no-result position-absolute m-0" *ngIf="results && results.length == 0">
+          <!-- WHILE LOADING -->
+          <div class="loading-icon" *ngIf="loading">
+            <img src="../../assets/images/rolling.gif" alt="" class="img-fluid">
+          </div>
+          <!-- WHEN NO RESULTS HAVE BEEN FOUND -->
+          <p class="no-result position-absolute m-0" *ngIf="results && results.length == 0 && loading == false">
             <i class="far fa-frown"></i>
             No result found
           </p>
           <ul class="list-unstyled m-0 p-0" *ngIf="results">
-            <li *ngFor="let result of results">
-              <a target="_blank" href="{{ result.collectionViewUrl }}" class="d-flex flex-wrap">
+            <li *ngFor="let track of results">
+              <a target="_blank" href="{{ track.link }}" class="d-flex flex-wrap">
                 <div class="img-sec">
-                  <img src="{{ result.artworkUrl60 }}" alt="{{ result.trackName }}" class="img-fluid">
+                  <img src="{{ track.thumbnail }}" alt="{{ track.name }}" class="img-fluid">
                 </div>
                 <div class="text">
-                  {{ result.trackName }} &nbsp;
-                  <span class="">({{ result.collectionName }})</span>
-                  <p class="m-0">By: <b>{{ result.artistName }}</b></p>
+                  {{ track.name }} &nbsp;
+                  <span class="">({{ track.album }})</span>
+                  <p class="m-0">By: <b>{{ track.artist }}</b></p>
                 </div>
               </a>
             </li>

@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ItunesService } from './itunesServ/itunes.service';
-import { Observable, pipe } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss'],
-  providers: [ItunesService]
+  styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
   results: Object[];
-  searchField: FormControl;
+  searchField: FormControl = new FormControl();
+  loading: boolean = false;
   constructor(private itunesService: ItunesService) { }
 
   ngOnInit() {
@@ -21,10 +20,13 @@ export class SearchComponent implements OnInit {
       let inp: any = document.querySelector('#searchInput');
       inp.focus();
     }());
+
+    
   }
 
   // ON FOCUS DISPLAY CROSS
   isText = false;
+
   searchFocus(elem) {
     if (elem.target.value !== "") {
       this.isText = true;
@@ -32,16 +34,18 @@ export class SearchComponent implements OnInit {
       this.isText = false;
     }
 
-    // console.log(elem.target.value);
-    // elem.target.value.pipe(debounceTime(400)).subscribe(res => {
-    //   console.log(res);
+    // LOADING ICONS AND EMPTY THE RESULT FIELD
+    this.loading = true;
+    this.results = [];
+    // FETCHING DATA
+    // this.searchField.valueChanges.pipe(debounceTime(400)).pipe(distinctUntilChanged()).subscribe(vals => {
+    //   this.loading = false;
+    //   this.results = vals;
     // });
-
-    // this.itunesService.getData(elem.target.value).subscribe((res: any) => {
-    //   this.results = res.json().results;
-    //   console.log(res.json().results);
-    //   console.log(this.results);
-    // })
+    this.itunesService.getData(elem.target.value).subscribe(data => {
+      this.loading = false;
+      this.results = data;
+    });
   }
   // EMPTY THE SEARCH INPUT
   emptysearch(elem) {
@@ -49,5 +53,4 @@ export class SearchComponent implements OnInit {
     inp.value = '';
     this.isText = false;
   }
-
 }
