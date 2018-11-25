@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+// import { SearchItem } from './searchItem/SearchItem';
 import { ItunesService } from './itunesServ/itunes.service';
-import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-search',
@@ -9,9 +11,12 @@ import { debounceTime, distinctUntilChanged, map } from 'rxjs/operators';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
+  // results: Observable<SearchItem[]>;
   results: Object[];
   searchField: FormControl = new FormControl();
   loading: boolean = false;
+  isInputText: boolean = false;
+  isSearch: boolean = false;
   constructor(private itunesService: ItunesService) { }
 
   ngOnInit() {
@@ -21,36 +26,40 @@ export class SearchComponent implements OnInit {
       inp.focus();
     }());
 
-    
+    // FETCHINGDATA
+    this.searchField.valueChanges
+      .pipe(
+        debounceTime(500),
+        distinctUntilChanged(),
+        tap(() => {
+          // LOADING ICONS
+          this.loading = true;
+        }),
+        switchMap(searchTerm => {
+          return this.itunesService.getData(searchTerm)
+        }))
+      // tap(() => {
+      //   // LOADING ICONS
+      //   this.loading = false;
+      // }))
+      .subscribe(data => {
+        this.loading = false;
+        this.results = data;
+      })
   }
-
   // ON FOCUS DISPLAY CROSS
-  isText = false;
-
   searchFocus(elem) {
     if (elem.target.value !== "") {
-      this.isText = true;
+      this.isInputText = true;
+      this.isSearch = true;
     } else {
-      this.isText = false;
+      this.isInputText = false;
     }
-
-    // LOADING ICONS AND EMPTY THE RESULT FIELD
-    this.loading = true;
-    this.results = [];
-    // FETCHING DATA
-    // this.searchField.valueChanges.pipe(debounceTime(400)).pipe(distinctUntilChanged()).subscribe(vals => {
-    //   this.loading = false;
-    //   this.results = vals;
-    // });
-    this.itunesService.getData(elem.target.value).subscribe(data => {
-      this.loading = false;
-      this.results = data;
-    });
   }
   // EMPTY THE SEARCH INPUT
   emptysearch(elem) {
     let inp: any = document.querySelector('#searchInput');
     inp.value = '';
-    this.isText = false;
+    this.isInputText = false;
   }
 }

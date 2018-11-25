@@ -10,11 +10,11 @@
           <div class="position-absolute">
             <i class="fas fa-music"></i>
           </div>
-          <div class="position-absolute cancelediting" *ngIf="isText" (click)="emptysearch($event)">
+          <div class="position-absolute cancelediting" *ngIf="isInputText" (click)="emptysearch($event)">
             <i class="fas fa-times"></i>
           </div>
         </div>
-        <div class="sResult position-relative" *ngIf="results">
+        <div class="sResult position-relative" *ngIf="isSearch">
           <!-- WHILE LOADING -->
           <div class="loading-icon" *ngIf="loading">
             <img src="../../assets/images/rolling.gif" alt="" class="img-fluid">
@@ -25,6 +25,7 @@
             No result found
           </p>
           <ul class="list-unstyled m-0 p-0" *ngIf="results">
+            <!-- <li *ngFor="let track of results | async"> -->
             <li *ngFor="let track of results">
               <a target="_blank" href="{{ track.link }}" class="d-flex flex-wrap">
                 <div class="img-sec">

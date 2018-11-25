@@ -1,16 +1,9 @@
 import { Injectable } from '@angular/core';
+import { SearchItem } from '../searchItem/SearchItem';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-class SearchItem {
-  constructor(
-    public name: string,
-    public artist: string,
-    public link: string,
-    public album: string,
-    public thumbnail: string) {
-  }
-}
+
 @Injectable({
   providedIn: 'root'
 })
