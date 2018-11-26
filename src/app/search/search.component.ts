@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 // import { SearchItem } from './searchItem/SearchItem';
 import { ItunesService } from './itunesServ/itunes.service';
 import { Observable } from 'rxjs';
@@ -17,7 +18,7 @@ export class SearchComponent implements OnInit {
   loading: boolean = false;
   isInputText: boolean = false;
   isSearch: boolean = false;
-  constructor(private itunesService: ItunesService) { }
+  constructor(private itunesService: ItunesService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     // FOCUS INPUT WHEN FIRST LOAD
@@ -45,7 +46,12 @@ export class SearchComponent implements OnInit {
       .subscribe(data => {
         this.loading = false;
         this.results = data;
-      })
+      });
+
+    this.route.params.subscribe(res => {
+      console.log(res);
+    });
+    
   }
   // ON FOCUS DISPLAY CROSS
   searchFocus(elem) {
