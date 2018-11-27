@@ -20,8 +20,7 @@ export class SearchComponent implements OnInit {
   isSearch: boolean = false;
   constructor(private itunesService: ItunesService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe(params => {
-      // if (Object.keys(params).length) {
-      if (params['name']) {
+      if (params['name'] && params['name'] !== 'null') {
         console.log(params);
       }
     });
