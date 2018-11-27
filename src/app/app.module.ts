@@ -14,7 +14,7 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 // ROUTING LINKS
 const routes: Routes = [
   { path: 'search', component: SearchComponent },
-  { path: 'search/:id', component: SearchComponent },
+  // { path: 'search/:term', component: SearchComponent },
   { path: '', redirectTo: "search", pathMatch: 'full' },
   { path: '**', component: PagenotfoundComponent, pathMatch: 'full' }
 ]
