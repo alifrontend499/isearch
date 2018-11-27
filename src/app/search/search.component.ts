@@ -59,6 +59,7 @@ export class SearchComponent implements OnInit {
     //   this.isInputText = false;
     // }
   }
+  // test
   // EMPTY THE SEARCH INPUT
   emptysearch(elem) {
     // let inp: any = document.querySelector('#searchInput');
