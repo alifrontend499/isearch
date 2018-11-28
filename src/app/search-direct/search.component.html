@@ -1,0 +1,48 @@
+<div class="searchouter">
+  <h1 class="text-center heading">Search your favourite song here</h1>
+  <div class="searcinner">
+    <!-- <form action="#"> -->
+    <div class="form-group">
+      <!-- <label>Song, Artist name, Album name</label> -->
+      <div class="position-relative searchmain d-flex">
+        <input type="text" id="searchInput" name="search" class="form-control" placeholder="Song, Artist name, Album name"
+          (keyup)="searchFocus($event);" [formControl]="searchField" autocomplete="off">
+          <!-- NEW -->
+        <!-- <button class="btn btn-primary" (click)="doSearch(searchField.value)">Submit</button> -->
+        <div class="position-absolute">
+          <i class="fas fa-music"></i>
+        </div>
+        <div class="position-absolute cancelediting" *ngIf="isInputText" (click)="emptysearch($event)">
+          <i class="fas fa-times"></i>
+        </div>
+      </div>
+      <div class="sResult position-relative" *ngIf="isSearch">
+        <!-- WHILE LOADING -->
+        <div class="loading-icon" *ngIf="loading">
+          <img src="../../assets/images/rolling.gif" alt="" class="img-fluid">
+        </div>
+        <!-- WHEN NO RESULTS HAVE BEEN FOUND -->
+        <p class="no-result position-absolute m-0" *ngIf="results && results.length == 0 && loading == false">
+          <i class="far fa-frown"></i>
+          No result found
+        </p>
+        <ul class="list-unstyled m-0 p-0" *ngIf="results">
+          <!-- <li *ngFor="let track of results | async"> -->
+          <li *ngFor="let track of results">
+            <a target="_blank" href="{{ track.link }}" class="d-flex flex-wrap">
+              <div class="img-sec">
+                <img src="{{ track.thumbnail }}" alt="{{ track.name }}" class="img-fluid">
+              </div>
+              <div class="text">
+                {{ track.name }} &nbsp;
+                <span class="">({{ track.album }})</span>
+                <p class="m-0">By: <b>{{ track.artist }}</b></p>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- </form> -->
+  </div>
+</div>
