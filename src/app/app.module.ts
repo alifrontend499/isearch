@@ -17,7 +17,16 @@ import { ArtistAlbumsComponent } from './artist/artist-albums/artist-albums.comp
 // ROUTING LINKS
 const routes: Routes = [
   { path: 'search', component: SearchComponent },
-  { path: 'artist', component: ArtistComponent },
+  // { path: 'artist', component: ArtistComponent },
+  {
+    path: 'artist/:artistId',
+    component: ArtistComponent,
+    children: [
+      { path: '', redirectTo: 'tracks', pathMatch: 'prefix' },
+      { path: 'tracks', component: ArtistSongsComponent },
+      { path: 'albums', component: ArtistAlbumsComponent },
+    ]
+  },
   { path: '', redirectTo: "search", pathMatch: 'full' },
   { path: '**', component: PagenotfoundComponent, pathMatch: 'full' }
 ]

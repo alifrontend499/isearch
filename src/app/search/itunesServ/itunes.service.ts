@@ -20,6 +20,7 @@ export class ItunesService {
       return res.json().results.map(item => {
         return new SearchItem(
           item.trackName,
+          item.artistId,
           item.artistName,
           item.collectionViewUrl,
           item.collectionName,

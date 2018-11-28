@@ -5,8 +5,8 @@
     <div class="form-group">
       <!-- <label>Song, Artist name, Album name</label> -->
       <div class="position-relative searchmain d-flex">
-        <input type="text" id="searchInput" name="search" class="form-control" placeholder="Artist name"
-          [formControl]="searchField" autocomplete="off">
+        <input type="text" id="searchInput" name="search" class="form-control" placeholder="Artist name" [formControl]="searchField"
+          autocomplete="off">
         <!-- NEW -->
         <button class="btn btn-primary" (click)="doSearch(searchField.value)">Submit</button>
         <div class="position-absolute">
@@ -22,14 +22,15 @@
           <img src="../../assets/images/rolling.gif" alt="" class="img-fluid">
         </div>
         <!-- WHEN NO RESULTS HAVE BEEN FOUND -->
-        <p class="no-result position-absolute m-0" *ngIf="results && results.length == 0 && loading == false">
+        <p class="no-result position-absolute m-0" *ngIf="noResult">
           <i class="far fa-frown"></i>
           No result found
         </p>
         <ul class="list-unstyled m-0 p-0" *ngIf="results">
           <!-- <li *ngFor="let track of results | async"> -->
           <li *ngFor="let track of results">
-            <a target="_blank" href="{{ track.link }}" class="d-flex flex-wrap">
+            <!-- <a target="_blank" href="{{ track.link }}" class="d-flex flex-wrap"> -->
+            <a [routerLink]="['/artist', track.artistId]" class="d-flex flex-wrap">
               <div class="img-sec">
                 <img src="{{ track.thumbnail }}" alt="{{ track.name }}" class="img-fluid">
               </div>

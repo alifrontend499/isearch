@@ -10,11 +10,24 @@ import { ItunesService } from './itunesServ/itunes.service';
 })
 export class SearchComponent implements OnInit {
   searchField: FormControl = new FormControl();
+  isSearch: boolean = false;
+  loading: boolean = false;
+  noResult: boolean = false;
+  results: Object[];
   constructor(private itunesService: ItunesService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe(params => {
       if (params['name'] && params['name'] !== 'null') {
+        this.isSearch = true;
+        this.loading = true;
         this.itunesService.getData(params['name']).subscribe(res => {
-          console.log(res);
+          this.results = res;
+          this.loading = false;
+          console.log(this.results);
+          if (this.results.length == 0) {
+            this.noResult = true;
+          } else {
+            this.noResult = false;
+          }
         })
       }
     });
@@ -29,6 +42,12 @@ export class SearchComponent implements OnInit {
   }
   // BUTTON CLICK
   doSearch(term: string) {
+    let inp: any = document.querySelector('#searchInput');
+    if (inp.value !== "") {
+      this.isSearch = true;
+    } else {
+    }
     this.router.navigate(['search', { name: term }]);
+
   }
 }

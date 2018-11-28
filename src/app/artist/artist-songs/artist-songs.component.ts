@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-artist-songs',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArtistSongsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private activeRoute: ActivatedRoute) {
+    activeRoute.parent.params.subscribe(res => {
+      console.log(res);
+    });
+  }
 
   ngOnInit() {
   }
