@@ -10,11 +10,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchComponent } from './search/search.component';
 import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
+import { ArtistComponent } from './artist/artist.component';
+import { ArtistSongsComponent } from './artist/artist-songs/artist-songs.component';
+import { ArtistAlbumsComponent } from './artist/artist-albums/artist-albums.component';
 
 // ROUTING LINKS
 const routes: Routes = [
   { path: 'search', component: SearchComponent },
-  // { path: 'search/:term', component: SearchComponent },
+  { path: 'artist', component: ArtistComponent },
   { path: '', redirectTo: "search", pathMatch: 'full' },
   { path: '**', component: PagenotfoundComponent, pathMatch: 'full' }
 ]
@@ -23,7 +26,10 @@ const routes: Routes = [
   declarations: [
     AppComponent,
     SearchComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    ArtistComponent,
+    ArtistSongsComponent,
+    ArtistAlbumsComponent
   ],
   imports: [
     BrowserModule,

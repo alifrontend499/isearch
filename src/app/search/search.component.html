@@ -1,14 +1,14 @@
 <div class="searchouter">
-  <h1 class="text-center heading">Search your favourite song here</h1>
+  <h1 class="text-center heading">Search your favourite Artist here</h1>
   <div class="searcinner">
     <!-- <form action="#"> -->
     <div class="form-group">
       <!-- <label>Song, Artist name, Album name</label> -->
       <div class="position-relative searchmain d-flex">
-        <input type="text" id="searchInput" name="search" class="form-control" placeholder="Song, Artist name, Album name"
-          (keyup)="searchFocus($event);" [formControl]="searchField" autocomplete="off">
-          <!-- NEW -->
-        <!-- <button class="btn btn-primary" (click)="doSearch(searchField.value)">Submit</button> -->
+        <input type="text" id="searchInput" name="search" class="form-control" placeholder="Artist name"
+          [formControl]="searchField" autocomplete="off">
+        <!-- NEW -->
+        <button class="btn btn-primary" (click)="doSearch(searchField.value)">Submit</button>
         <div class="position-absolute">
           <i class="fas fa-music"></i>
         </div>

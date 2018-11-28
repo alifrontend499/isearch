@@ -29,4 +29,8 @@ export class ItunesService {
     }))
   }
 
+  getArtist(userId) {
+    let apiUrl = `${this.itunesAPI}?lookup?id=${userId}`;
+  }
+
 }

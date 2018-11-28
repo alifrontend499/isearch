@@ -1,0 +1,117 @@
+.main-content {
+    padding: 50px 0;
+    .container {
+        padding: 0;
+    }
+    .MC_inner {
+        border: 6px solid #c4c2c2;
+        padding: 50px;
+    }
+}
+
+.a-profile {
+    .img-sec {
+        border: 5px solid #fff;
+        border-bottom-color: #f1f0f0;
+        border-right-color: #f1f0f0;
+        width: 170px;
+        height: 170px;
+        padding: 10px;
+    }
+    .text-sec {
+        width: calc(100% - 170px);
+        padding-left: 30px;
+        p {
+            font-size: 40px;
+            font-weight: bold;
+            line-height: normal;
+        }
+    }
+}
+
+.list {
+    border-top: 5px solid #efefef;
+    margin-top: 30px;
+    padding-top: 30px;
+    >.d-flex {
+        .btn {
+            width: 50%;
+            border-radius: 0;
+            font-size: 20px;
+            position: relative;
+            font-weight: bold;
+            &:first-child {
+                margin-right: auto;
+            }
+            &:last-child {
+                margin-left: auto;
+            }
+            &::after {
+                content: '';
+                position: absolute;
+                height: 0;
+                width: 0;
+                background: transparent;
+                bottom: -1px;
+                left: 50%;
+                -webkit-transform: translate(-50%, 100%);
+                transform: translate(-50%, 100%);
+                border-width: 13px;
+                border-style: solid;
+                border-color: transparent;
+            }
+            &.active,
+            &:hover {
+                background-color: #fff;
+                border-color: #fff;
+                color: #000;
+            }
+            &.active {
+                &::after {
+                    border-top-color: #fff;
+                }
+            }
+        }
+    }
+}
+
+.listing {
+    >ul {
+        border: 4px solid #9f9f9f;
+        margin-top: 20px !important;
+        >li {
+            >a {
+                color: #fff;
+                text-decoration: none;
+                padding: 10px;
+                border-bottom: 1px solid #9f9f9f;
+                transition: .1s;
+                &:hover {
+                    background: rgba(0, 0, 0, 0.2);
+                }
+            }
+            &:last-child {
+                >a {
+                    border-bottom: none;
+                }
+            }
+        }
+    }
+    .img-sec {
+        width: 40px;
+    }
+    .text {
+        width: calc(100% - 40px);
+        padding-left: 15px;
+        font-family: opensans-bold;
+        font-size: 18px;
+        >span {
+            font-family: opensans-regular;
+            font-size: 13px;
+        }
+        p {
+            font-family: opensans-regular;
+            font-size: 14px;
+        }
+    }
+}
