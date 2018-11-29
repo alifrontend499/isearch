@@ -30,8 +30,11 @@ export class ItunesService {
     }))
   }
 
-  getArtist(userId) {
-    let apiUrl = `${this.itunesAPI}?lookup?id=${userId}`;
+  getArtist(user, limit = 20) {
+    let apiUrl = `${this.itunesAPI}?term=${user}&entity=allArtist&limit=${limit}&callback=JSONP_CALLBACK`;
+    return this.jsonp.request(apiUrl).pipe(map(res => {
+      return res.json().results;
+    }));
   }
 
 }

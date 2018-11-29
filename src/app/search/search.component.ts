@@ -20,15 +20,19 @@ export class SearchComponent implements OnInit {
       if (params['name'] && params['name'] !== 'null') {
         this.isSearch = true;
         this.loading = true;
-        this.itunesService.getData(params['name']).subscribe(res => {
-          this.results = res;
+        this.itunesService.getArtist(params['name']).subscribe(res => {
+          console.log(res);
           this.loading = false;
-          if (this.results.length == 0) {
-            this.noResult = true;
-          } else {
-            this.noResult = false;
-          }
-        })
+        });
+        // this.itunesService.getData(params['name']).subscribe(res => {
+        //   this.results = res;
+        //   this.loading = false;
+        //   if (this.results.length == 0) {
+        //     this.noResult = true;
+        //   } else {
+        //     this.noResult = false;
+        //   }
+        // })
       }
     });
   }
