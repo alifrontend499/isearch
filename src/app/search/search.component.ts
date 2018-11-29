@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ItunesService } from './itunesServ/itunes.service';
+import { IsLoginService } from '../artist/isLoginServ/is-login.service';
 
 @Component({
   selector: 'app-search',
@@ -14,7 +15,7 @@ export class SearchComponent implements OnInit {
   loading: boolean = false;
   noResult: boolean = false;
   results: Object[];
-  constructor(private itunesService: ItunesService, private route: ActivatedRoute, private router: Router) {
+  constructor(private itunesService: ItunesService, private route: ActivatedRoute, private router: Router, private isLoginServ: IsLoginService) {
     this.route.params.subscribe(params => {
       if (params['name'] && params['name'] !== 'null') {
         this.isSearch = true;
@@ -22,7 +23,6 @@ export class SearchComponent implements OnInit {
         this.itunesService.getData(params['name']).subscribe(res => {
           this.results = res;
           this.loading = false;
-          console.log(this.results);
           if (this.results.length == 0) {
             this.noResult = true;
           } else {
@@ -45,9 +45,8 @@ export class SearchComponent implements OnInit {
     let inp: any = document.querySelector('#searchInput');
     if (inp.value !== "") {
       this.isSearch = true;
-    } else {
+      this.isLoginServ.isLoginUser = true;
+      this.router.navigate(['search', { name: term }]);
     }
-    this.router.navigate(['search', { name: term }]);
-
   }
 }
