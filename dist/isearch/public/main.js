@@ -198,7 +198,8 @@ var AppModule = /** @class */ (function () {
                 _angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes),
                 _angular_http__WEBPACK_IMPORTED_MODULE_3__["HttpModule"],
                 _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormsModule"],
-                _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ReactiveFormsModule"]
+                _angular_forms__WEBPACK_IMPORTED_MODULE_4__["ReactiveFormsModule"],
+                _angular_http__WEBPACK_IMPORTED_MODULE_3__["JsonpModule"]
             ],
             providers: [
                 _search_itunesServ_itunes_service__WEBPACK_IMPORTED_MODULE_5__["ItunesService"]
@@ -608,16 +609,17 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 
 
 var ItunesService = /** @class */ (function () {
-    function ItunesService(http) {
+    function ItunesService(http, jsonp) {
         this.http = http;
+        this.jsonp = jsonp;
         this.itunesAPI = "https://itunes.apple.com/search";
     }
     // GETTING DATA
     // getData(searchData, limit = 20): Observable<SearchItem[]> {
     ItunesService.prototype.getData = function (searchData, limit) {
         if (limit === void 0) { limit = 20; }
-        var apiUrl = this.itunesAPI + "?term=" + searchData + "&media=music&limit=" + limit;
-        return this.http.get(apiUrl).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
+        var apiUrl = this.itunesAPI + "?term=" + searchData + "&media=music&limit=" + limit + "&callback=JSONP_CALLBACK";
+        return this.jsonp.request(apiUrl).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (res) {
             return res.json().results.map(function (item) {
                 return new _searchItem_SearchItem__WEBPACK_IMPORTED_MODULE_1__["SearchItem"](item.trackName, item.artistId, item.artistName, item.collectionViewUrl, item.collectionName, item.artworkUrl60);
             });
@@ -630,7 +632,7 @@ var ItunesService = /** @class */ (function () {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
         }),
-        __metadata("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_2__["Http"]])
+        __metadata("design:paramtypes", [_angular_http__WEBPACK_IMPORTED_MODULE_2__["Http"], _angular_http__WEBPACK_IMPORTED_MODULE_2__["Jsonp"]])
     ], ItunesService);
     return ItunesService;
 }());

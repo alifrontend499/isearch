@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SearchItem } from '../searchItem/SearchItem';
-import { Http } from '@angular/http';
+import { Http, Jsonp } from '@angular/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -9,14 +9,14 @@ import { map } from 'rxjs/operators';
 })
 export class ItunesService {
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private jsonp: Jsonp) { }
   itunesAPI = "https://itunes.apple.com/search";
 
   // GETTING DATA
   // getData(searchData, limit = 20): Observable<SearchItem[]> {
   getData(searchData, limit = 20): Observable<SearchItem[]> {
-    let apiUrl = `${this.itunesAPI}?term=${searchData}&media=music&limit=${limit}`;
-    return this.http.get(apiUrl).pipe(map(res => {
+    let apiUrl = `${this.itunesAPI}?term=${searchData}&media=music&limit=${limit}&callback=JSONP_CALLBACK`;
+    return this.jsonp.request(apiUrl).pipe(map(res => {
       return res.json().results.map(item => {
         return new SearchItem(
           item.trackName,
