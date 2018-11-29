@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ItunesService } from './itunesServ/itunes.service';
-import { IsLoginService } from '../artist/isLoginServ/is-login.service';
 
 @Component({
   selector: 'app-search',
@@ -15,24 +14,20 @@ export class SearchComponent implements OnInit {
   loading: boolean = false;
   noResult: boolean = false;
   results: Object[];
-  constructor(private itunesService: ItunesService, private route: ActivatedRoute, private router: Router, private isLoginServ: IsLoginService) {
+  constructor(private itunesService: ItunesService, private route: ActivatedRoute, private router: Router) {
     this.route.params.subscribe(params => {
       if (params['name'] && params['name'] !== 'null') {
         this.isSearch = true;
         this.loading = true;
-        this.itunesService.getArtist(params['name']).subscribe(res => {
-          console.log(res);
+        this.itunesService.getData(params['name']).subscribe(res => {
+          this.results = res;
           this.loading = false;
-        });
-        // this.itunesService.getData(params['name']).subscribe(res => {
-        //   this.results = res;
-        //   this.loading = false;
-        //   if (this.results.length == 0) {
-        //     this.noResult = true;
-        //   } else {
-        //     this.noResult = false;
-        //   }
-        // })
+          if (this.results.length == 0) {
+            this.noResult = true;
+          } else {
+            this.noResult = false;
+          }
+        })
       }
     });
   }
@@ -49,7 +44,6 @@ export class SearchComponent implements OnInit {
     let inp: any = document.querySelector('#searchInput');
     if (inp.value !== "") {
       this.isSearch = true;
-      this.isLoginServ.isLoginUser = true;
       this.router.navigate(['search', { name: term }]);
     }
   }

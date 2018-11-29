@@ -10,7 +10,6 @@ export class ArtistSongsComponent implements OnInit {
 
   constructor(private activeRoute: ActivatedRoute) {
     activeRoute.parent.params.subscribe(res => {
-      console.log(res);
     });
   }
 

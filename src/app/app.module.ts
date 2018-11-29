@@ -13,7 +13,6 @@ import { PagenotfoundComponent } from './pagenotfound/pagenotfound.component';
 import { ArtistComponent } from './artist/artist.component';
 import { ArtistSongsComponent } from './artist/artist-songs/artist-songs.component';
 import { ArtistAlbumsComponent } from './artist/artist-albums/artist-albums.component';
-import { AlwaysAuthGuard } from './artist/auth/always-auth.guard';
 
 // ROUTING LINKS
 const routes: Routes = [
@@ -22,7 +21,6 @@ const routes: Routes = [
   {
     path: 'artist/:artistId',
     component: ArtistComponent,
-    canActivate: [AlwaysAuthGuard],
     children: [
       { path: '', redirectTo: 'tracks', pathMatch: 'prefix' },
       { path: 'tracks', component: ArtistSongsComponent },

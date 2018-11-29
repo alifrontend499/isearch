@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { IsLoginService } from './isLoginServ/is-login.service';
 
 @Component({
   selector: 'app-artist',
@@ -8,10 +7,9 @@ import { IsLoginService } from './isLoginServ/is-login.service';
 })
 export class ArtistComponent implements OnInit {
 
-  constructor(private isLoginService: IsLoginService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.isLoginService.isLoginUser = true;
   }
 
 }

@@ -53,8 +53,8 @@
         overflow: auto;
         margin-bottom: 50px;
         background: #4e54c8;
-        background: -webkit-linear-gradient(to right, #8f94fb, #4e54c8);
-        background: linear-gradient(to right, #8f94fb, #4e54c8);
+        background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
+        background: linear-gradient(to left, #8f94fb, #4e54c8);
         .no-result {
             top: 50%;
             left: 50%;
@@ -123,5 +123,7 @@
             margin-bottom: 2rem;
             font-size: 35px;
         }
+        padding: 0 20px;
     }
+
 }
