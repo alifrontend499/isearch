@@ -30,3 +30,36 @@ body {
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   color: #fff;
 }
+
+
+// MODAL CSS
+.modal {
+  button.close {
+    position: absolute;
+    background: red;
+    text-shadow: none;
+    color: #fff;
+    height: 25px;
+    width: 25px;
+    border-radius: 100%;
+    line-height: 9px;
+    text-align: center;
+    padding: 0 7px 3px;
+    right: -10px;
+    top: -10px;
+    opacity: 1;
+  }
+}
+
+.disablebtn {
+  opacity: .5;
+  pointer-events: none;
+}
+
+.alert {
+  padding: 3px 8px;
+  margin-top: 5px;
+  margin-bottom: 0;
+  font-family: "opensans-bold";
+  font-size: 13px;
+}

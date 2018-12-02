@@ -4,15 +4,33 @@
   <!-- Links -->
   <ul class="navbar-nav d-flex">
     <li class="nav-item">
-      <a class="nav-link" routerLink="search">Search</a>
+      <a class="nav-link" routerLinkActive="active" routerLink="search">Search</a>
     </li>
+  </ul>
+
+  <ul class="navbar-nav d-flex">
     <li class="nav-item">
-      <a class="nav-link" routerLink="search">Login</a>
+      <a class="nav-link" *ngIf="isLogin == false" routerLinkActive="active" routerLink="login">Login</a>
+      <a class="nav-link logout_btn" *ngIf="isLogin" (click)="logout()">Logout</a>
     </li>
+
   </ul>
 
 </nav>
 <!-- <div class="router-outer m-4"> -->
 <div class="router-outer">
   <router-outlet></router-outlet>
+</div>
+
+<!-- THE MODAL -->
+<div class="modal fade" id="commonModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <button type="button" class="close" data-dismiss="modal">&times;</button>
+      <!-- Modal body -->
+      <div class="modal-body text-dark">
+        {{ msg }}
+      </div>
+    </div>
+  </div>
 </div>
