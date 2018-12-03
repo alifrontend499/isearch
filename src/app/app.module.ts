@@ -31,7 +31,7 @@ const routes: Routes = [
       { path: 'albums', component: ArtistAlbumsComponent },
     ]
   },
-  { path: '', redirectTo: "search", pathMatch: 'full' },
+  { path: '', redirectTo: "login", pathMatch: 'full' },
   { path: '**', component: PagenotfoundComponent, pathMatch: 'full' }
 ]
 

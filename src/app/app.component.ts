@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, TemplateRef } from '@angular/core';
 import { IsLoggedinService } from './authGuard/is-loggedin.service';
 import * as $ from 'jquery';
 
@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   title = 'isearch';
   msg: string;
   isLogin: boolean = this.isLoggedIn.isLoggedIn;
+  @ViewChild('sp') sp: TemplateRef<any>;
   constructor(private isLoggedIn: IsLoggedinService) { }
 
   logout() {
@@ -21,7 +22,8 @@ export class AppComponent implements OnInit {
   };
   ngOnInit() {
     // this.openModal("Please login first");
-    console.log("Home Comp:" + this.isLoggedIn.isLoggedIn);
+    // console.log("Home Comp:" + this.isLoggedIn.isLoggedIn);
+    console.log(this.sp.elementRef.nativeElement);
   }
   // MODAL
   openModal(msg) {
