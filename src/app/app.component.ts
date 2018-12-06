@@ -16,11 +16,14 @@ export class AppComponent implements OnInit {
 
   logout() {
     // ev.preventDefault();
-    console.log('Logout');
+    // console.log('Logout');
     return false;
   };
   ngOnInit() {
     // this.openModal("Please login first");
+    if (localStorage.getItem('userLoginDetails') !== null) {
+      this.isLoggedIn.changeIsLoggedIn(true);
+    }
     // console.log("Home Comp:" + this.isLoggedIn.isLoggedIn);
   }
   // MODAL

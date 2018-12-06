@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ItunesService } from './search/itunesServ/itunes.service';
 import { IsLoggedinService } from './authGuard/is-loggedin.service';
+import { AuthService } from './Auth/auth.service';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -57,7 +58,8 @@ const routes: Routes = [
   providers: [
     ItunesService,
     AuthGuard,
-    IsLoggedinService
+    IsLoggedinService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })

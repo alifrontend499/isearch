@@ -40,7 +40,7 @@ export class SearchComponent implements OnInit {
       inp.focus();
     }());
 
-    console.log("Search Comp: " + this.isLoggedIn.isLoggedIn);
+    // console.log("Search Comp: " + this.isLoggedIn.isLoggedIn);
   }
   // BUTTON CLICK
   doSearch(term: string) {
