@@ -1,3 +1,5 @@
 export class Users {
-    data: number;
+    id: string;
+    name: string;
+    password: string;
 }

@@ -17,9 +17,7 @@ export class ArtistComponent implements OnInit {
   ngOnInit() {
   }
 
-  getUrlProps(): void {
-    this.http.get<Users[]>('http://localhost:3000/users').subscribe((res: Users[]) => {
-      console.log(res);
-    });
+  getUrlProps(): Observable<Users[]> {
+    return this.http.get<Users[]>('http://localhost:3000/users');
   }
 }
