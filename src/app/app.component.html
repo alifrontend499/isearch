@@ -13,6 +13,9 @@
       <a class="nav-link" *ngIf="isLogin == false" routerLinkActive="active" routerLink="login">Login</a>
       <a class="nav-link logout_btn" *ngIf="isLogin" (click)="logout()">Logout</a>
     </li>
+    <li class="nav-item">
+      <a routerLinkActive="active" routerLink="signup" class="nav-link">Signup</a>
+    </li>
 
   </ul>
 

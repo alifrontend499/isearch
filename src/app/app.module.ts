@@ -2,12 +2,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpModule, JsonpModule } from '@angular/http';
-import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
+import { HttpClientModule, HttpClientJsonpModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ItunesService } from './search/itunesServ/itunes.service';
 import { IsLoggedinService } from './authGuard/is-loggedin.service';
 import { AuthService } from './Auth/auth.service';
+import { AuthInterceptor } from './Auth/auth.interceptor';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,8 +20,10 @@ import { ArtistAlbumsComponent } from './artist/artist-albums/artist-albums.comp
 import { LoginComponent } from './login/login.component';
 
 import { AuthGuard } from './authGuard/auth.guard';
+import { SignupComponent } from './signup/signup.component';
 // ROUTING LINKS
 const routes: Routes = [
+  { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'search', component: SearchComponent, canActivate: [AuthGuard] },
   {
@@ -45,7 +48,8 @@ const routes: Routes = [
     ArtistComponent,
     ArtistSongsComponent,
     ArtistAlbumsComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +65,12 @@ const routes: Routes = [
     ItunesService,
     AuthGuard,
     IsLoggedinService,
-    AuthService
+    AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })

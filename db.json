@@ -1,12 +1,10 @@
 {
-  "ali": [
+  "userdata": [
     {
-      "name": "ali",
-      "password": "123456"
-    },
-    {
-      "name": "jaskaran",
-      "password": "654321"
+      "firstName": "Jaskaran",
+      "lastName": "singh",
+      "email": "jsss@gmail.com",
+      "password": "1223344"
     }
   ]
 }
