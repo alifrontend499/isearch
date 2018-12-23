@@ -6,7 +6,8 @@ import { Users } from '../modal/Users';
   providedIn: 'root'
 })
 export class AuthService {
-  signupApi: string = "http://localhost:3000/userdata";
+  // signupApi: string = "http://localhost:3000/userdata";
+  signupApi: string = "https://my-json-server.typicode.com/alifrontend499/isearch/userdata";
   constructor(private http: HttpClient) { }
   login(email: string, password: string) {
     // return this.http.post<User>('/api/login', { email, password }).pipe(shareReplay())
@@ -22,6 +23,6 @@ export class AuthService {
         headers: new HttpHeaders({
           "Content-Type": "application/json"
         })
-      })
+      });
   }
 }
