@@ -1,10 +1,9 @@
 {
-  "userdata": [
-    {
-      "firstName": "Jaskaran",
-      "lastName": "singh",
-      "email": "jsss@gmail.com",
-      "password": "1223344"
-    }
-  ]
+  "userdata": [{
+    "firstName": "ali",
+    "lastName": "mir",
+    "email": "ali@myl.co.in",
+    "password": "123456",
+    "id": 1
+  }]
 }

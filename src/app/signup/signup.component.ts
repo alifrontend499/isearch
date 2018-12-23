@@ -16,7 +16,10 @@ export class SignupComponent implements OnInit {
 
   signup(logForm: FormControl) {
     if (logForm.value.email && logForm.value.f_name && logForm.value.password) {
-      this.auth.signup(logForm.value.f_name, logForm.value.l_name, logForm.value.email, logForm.value.password);
+      this.auth.signup(logForm.value.f_name, logForm.value.l_name, logForm.value.email, logForm.value.password).subscribe(res => {
+        console.log(res);
+        console.log("Signup successfull.");
+      });
     } else {
       alert("Please fill all the fields.")
     }
