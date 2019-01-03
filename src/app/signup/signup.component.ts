@@ -24,6 +24,9 @@ export class SignupComponent implements OnInit {
         alert("Signup successfull. Redirecting to login page");
         this.router.navigate(['login']);
       });
+
+      // this.auth.signup(logForm.value.f_name, logForm.value.l_name, logForm.value.email, logForm.value.password);
+
     } else {
       alert("Please fill all the fields.")
     }
