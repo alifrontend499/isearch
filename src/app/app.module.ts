@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';  
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpModule, JsonpModule } from '@angular/http';
@@ -7,6 +7,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ItunesService } from './search/itunesServ/itunes.service';
 import { IsLoggedinService } from './authGuard/is-loggedin.service';
+
+// FIRESTORE
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+// import { AngularFireModule } from 'angularfire2';
+// import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { environment } from '../environments/environment';
+import { FirestoreService } from './firestore/firestore.service';
+
+
 import { AuthService } from './Auth/auth.service';
 import { AuthInterceptor } from './Auth/auth.interceptor';
 
@@ -21,6 +31,7 @@ import { LoginComponent } from './login/login.component';
 
 import { AuthGuard } from './authGuard/auth.guard';
 import { SignupComponent } from './signup/signup.component';
+
 // ROUTING LINKS
 const routes: Routes = [
   { path: 'signup', component: SignupComponent },
@@ -59,13 +70,16 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    JsonpModule
+    JsonpModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule
   ],
   providers: [
     ItunesService,
     AuthGuard,
     IsLoggedinService,
     AuthService,
+    FirestoreService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

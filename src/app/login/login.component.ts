@@ -3,35 +3,50 @@ import { IsLoggedinService } from '../authGuard/is-loggedin.service';
 import { AuthService } from '../Auth/auth.service';
 import { NgForm, Form } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FirestoreService } from '../firestore/firestore.service';
+import { User } from '../firestore/model/user.model';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  // email: string = "ali@gmail.com";
-  // password: string = "123456";
-  constructor(private isLoggedIn: IsLoggedinService, private router: Router, private authService: AuthService) { }
+  constructor(
+    private isLoggedIn: IsLoggedinService,
+    private router: Router,
+    private authService: AuthService,
+    private firestore: FirestoreService,
+  ) { }
   loginForm: Form;
+  isAuthenticated: boolean;
+  user: User;
   ngOnInit() {
-    // console.log("login comp " + this.isLoggedIn.isLoggedIn);
-
-    // console.log(this.authService.login("Ali", "123456"));
   }
 
-  // checkUser(fm: NgForm): void {
-  //   if (this.email == fm.value.email && this.password == fm.value.password) {
-  //     if (typeof (Storage) !== "undefined") {
-  //       let userdata: string = fm.value;
-  //       localStorage.setItem("userLoginDetails", userdata);
-  //       this.isLoggedIn.changeIsLoggedIn(true);
-  //       this.router.navigate(["search"]);
-  //     }
-  //   } else {
-  //     alert("Email Or password is wrong");
-  //   }
-  // }
+  checkUser(fm: NgForm): void {
+    this.firestore.user_login(fm.value.email, fm.value.password).subscribe(res => {
+      if (res.length) {
+        if (fm.value.email == res[0]['payload'].doc.data()['email'] && fm.value.password == res[0]['payload'].doc.data()['password']) {
+          this.user = {
+            id: res[0]['payload'].doc.id,
+            email: res[0]['payload'].doc.data()['email'],
+            first_name: res[0]['payload'].doc.data()['first_name'],
+            last_name: res[0]['payload'].doc.data()['last_name']
+          }
+          // console.log("User Authenticated");
+          // console.log(this.user);
+          this.authService.createJwt(this.user);
+          // return true;
+        }
+      } else {
+        alert("email or Password is incorrect");
+        // return false
+      }
+    });
 
+
+  }
 
 }
