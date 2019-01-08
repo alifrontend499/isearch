@@ -9,7 +9,19 @@ import { Observable } from 'rxjs';
 })
 export class FirestoreService {
   constructor(private db: AngularFirestore) { }
-  user_login(email: string, password: string): Observable<any> {
+  // USER LOGIN
+  user_login(email: string): Observable<any> {
     return this.db.collection(config.collection_endpoint, ref => ref.where("email", '==', email)).snapshotChanges();
+  }
+  // USER SIGNUP
+  user_signup(email: string, first_name: string, last_name: string, password: string) {
+    let data = {
+      'email': email,
+      'first_name': first_name,
+      'last_name': last_name,
+      'password': password
+    }
+    // CHECKING USER
+    return this.db.collection(config.collection_endpoint).add(data);
   }
 }

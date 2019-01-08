@@ -13,6 +13,7 @@ import { User } from '../firestore/model/user.model';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  loading: boolean = false;
   constructor(
     private isLoggedIn: IsLoggedinService,
     private router: Router,
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
   }
 
   checkUser(fm: NgForm): void {
-    this.firestore.user_login(fm.value.email, fm.value.password).subscribe(res => {
+    this.loading = true;
+    this.firestore.user_login(fm.value.email).subscribe(res => {
       if (res.length) {
         if (fm.value.email == res[0]['payload'].doc.data()['email'] && fm.value.password == res[0]['payload'].doc.data()['password']) {
           this.user = {
@@ -35,12 +37,14 @@ export class LoginComponent implements OnInit {
             first_name: res[0]['payload'].doc.data()['first_name'],
             last_name: res[0]['payload'].doc.data()['last_name']
           }
-          // console.log("User Authenticated");
-          // console.log(this.user);
-          this.authService.createJwt(this.user);
+          console.log("User Authenticated");
+          console.log(this.user);
+          this.loading = false;
+          // this.authService.createJwt(this.user);
           // return true;
         }
       } else {
+        this.loading = false;
         alert("email or Password is incorrect");
         // return false
       }

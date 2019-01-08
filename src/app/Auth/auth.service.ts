@@ -1,20 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Users } from '../modal/Users';
-import { jsonwebtoken } from 'jsonwebtoken';
+// import { jwt } from './temp';
 import { secret } from '../Auth/secretkey/secret.key'
+import { jsonwebtoken } from 'jsonwebtoken'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  JWT: jsonwebtoken;
+  JWT: jsonwebtoken.jwt;
   signupApi: string = "http://localhost:3000/userdata";
-  // signupApi: string = "https://my-json-server.typicode.com/alifrontend499/isearch/userdata";
   constructor(private http: HttpClient) { }
-  login(email: string, password: string) {
-    // return this.http.post<User>('/api/login', { email, password }).pipe(shareReplay())
-  }
 
   createJwt(user: Object) {
     if (user) {
@@ -22,7 +19,7 @@ export class AuthService {
         subject: user
       }
       console.log("token");
-      let token = this.JWT.sign(payload, secret);
+      // let token = this.JWT.sign(payload, secret);
     }
   }
 
