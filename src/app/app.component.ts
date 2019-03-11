@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, TemplateRef } from '@angular/core';
-import { IsLoggedinService } from './authGuard/is-loggedin.service';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from './firebase/auth.service';
 import * as $ from 'jquery';
+import { auth } from 'firebase';
 
 
 @Component({
@@ -11,20 +12,20 @@ import * as $ from 'jquery';
 export class AppComponent implements OnInit {
   title = 'isearch';
   msg: string;
-  isLogin: boolean = this.isLoggedIn.isLoggedIn;
-  constructor(private isLoggedIn: IsLoggedinService) { }
+  isLogin: boolean = true;
+  constructor(private auth: AuthService) { }
 
   logout() {
-    // ev.preventDefault();
-    // console.log('Logout');
-    return false;
+    this.auth.logout();
   };
   ngOnInit() {
-    // this.openModal("Please login first");
-    if (localStorage.getItem('userLoginDetails') !== null) {
-      this.isLoggedIn.changeIsLoggedIn(true);
-    }
-    // console.log("Home Comp:" + this.isLoggedIn.isLoggedIn);
+    // this.auth.checkUser().subscribe(user => {
+    //   if(user !== null) {
+    //     this.isLogin == true;
+    //   } else {
+    //     this.isLogin == false
+    //   }
+    // })
   }
   // MODAL
   openModal(msg) {

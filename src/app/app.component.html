@@ -10,11 +10,13 @@
 
   <ul class="navbar-nav d-flex">
     <li class="nav-item">
-      <a class="nav-link" *ngIf="isLogin == false" routerLinkActive="active" routerLink="login">Login</a>
-      <a class="nav-link logout_btn" *ngIf="isLogin" (click)="logout()">Logout</a>
+      <a class="nav-link" *ngIf="auth.checkUser();" routerLinkActive="active" routerLink="login">Login</a>
     </li>
     <li class="nav-item">
-      <a routerLinkActive="active" routerLink="signup" class="nav-link">Signup</a>
+      <a routerLinkActive="active" *ngIf="auth.checkUser();" routerLink="signup" class="nav-link">Signup</a>
+    </li>
+    <li class="nav-item" *ngIf="!auth.checkUser();">
+      <a href="" class="nav-link logout_btn" (click)="logout()">Logout</a>
     </li>
 
   </ul>

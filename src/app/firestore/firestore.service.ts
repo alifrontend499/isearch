@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { config } from './config/app.config';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { Observable } from 'rxjs';
 
 
@@ -8,7 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FirestoreService {
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore, private db2: AngularFireDatabase) { }
   // USER LOGIN
   user_login(email: string): Observable<any> {
     return this.db.collection(config.collection_endpoint, ref => ref.where("email", '==', email)).snapshotChanges();
